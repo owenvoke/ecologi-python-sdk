@@ -1,9 +1,11 @@
+from typing import Optional, cast
+
 import requests
-from typing import cast
-from ecologi.types import Impact
+
+from .types import Impact
 
 TIMEOUT = 3
-API_BASE_URI = 'https://public.ecologi.com'
+API_BASE_URI = "https://public.ecologi.com"
 
 
 class EcologiException(RuntimeError):
@@ -21,27 +23,31 @@ class Ecologi:
 
     def user_exists(self, username: str) -> bool:
         try:
-            return self.impact(username).get('trees') is not None
+            return self.impact(username).get("trees") is not None
         except NotFoundException:
             return False
 
     def impact(self, username: str) -> Impact:
-        return cast(Impact, self.get(f'/users/{username}/impact'))
+        return cast(Impact, self.get(f"/users/{username}/impact"))
 
     def get(self, url: str):
-        return self.__request('GET', url)
+        return self.__request("GET", url)
 
-    def __request(self, method: str, url: str, params: dict = None):
+    def __request(self, method: str, url: str, params: Optional[dict] = None):
         if params is None:
             params = {}
 
-        if method == 'GET':
-            response = requests.get(self.base_uri + url, params=params, headers=self.headers)
+        if method == "GET":
+            response = requests.get(
+                self.base_uri + url, params=params, headers=self.headers
+            )
         else:
-            raise RuntimeError('Invalid request method provided')
+            raise RuntimeError("Invalid request method provided")
 
         if response.status_code == 404:
-            raise NotFoundException(response.json().get('responseCode'))
+            raise NotFoundException(response.json().get("responseCode"))
         if response.status_code >= 400:
-            raise EcologiException(response.json().get('responseCode') or 'Unknown error')
+            raise EcologiException(
+                response.json().get("responseCode") or "Unknown error"
+            )
         return response.json()

@@ -37,9 +37,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Testing
 
 ```shell
-pip install -r requirements-dev.txt
-
-pytest
+hatch run test
 ```
 
 ## Security
