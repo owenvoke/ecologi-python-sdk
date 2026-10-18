@@ -43,3 +43,17 @@ def test_not_authenticated():
 
         assert type(me) == bool
         assert me is False
+
+
+def test_requests_time_out():
+    with requests_mock.Mocker() as m:
+        m.get(
+            url="https://public.ecologi.com/users/owenvoke/impact",
+            json={"trees": 1733, "carbonOffset": 41.05},
+        )
+
+        ecologi.impact("owenvoke")
+        assert m.last_request.timeout == 10
+
+        Ecologi(timeout=2.5).impact("owenvoke")
+        assert m.last_request.timeout == 2.5

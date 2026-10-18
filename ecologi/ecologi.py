@@ -4,7 +4,8 @@ import requests
 
 from .types import Impact
 
-TIMEOUT = 3
+# Seconds to wait for a connection, and between bytes of the response
+TIMEOUT = 10
 API_BASE_URI = "https://public.ecologi.com"
 
 
@@ -17,8 +18,9 @@ class NotFoundException(EcologiException):
 
 
 class Ecologi:
-    def __init__(self, base_uri: str = API_BASE_URI) -> None:
+    def __init__(self, base_uri: str = API_BASE_URI, timeout: float = TIMEOUT) -> None:
         self.base_uri: str = base_uri
+        self.timeout: float = timeout
         self.headers: dict = {}
 
     def user_exists(self, username: str) -> bool:
@@ -39,7 +41,10 @@ class Ecologi:
 
         if method == "GET":
             response = requests.get(
-                self.base_uri + url, params=params, headers=self.headers
+                self.base_uri + url,
+                params=params,
+                headers=self.headers,
+                timeout=self.timeout,
             )
         else:
             raise RuntimeError("Invalid request method provided")

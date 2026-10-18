@@ -32,7 +32,7 @@ sites = ecologi.impact('owenvoke')
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [GitHub Releases][link-github-releases] for more information on what has changed recently.
 
 ## Testing
 
@@ -70,6 +70,7 @@ Read more about Treeware at [treeware.earth][link-treeware].
 
 [link-pypi]: https://pypi.org/project/ecologi-sdk
 [link-github-actions]: https://github.com/owenvoke/ecologi-python-sdk/actions
+[link-github-releases]: https://github.com/owenvoke/ecologi-python-sdk/releases
 [link-treeware]: https://treeware.earth
 [link-treeware-gifting]: https://ecologi.com/owenvoke?gift-trees
 [link-author]: https://github.com/owenvoke
