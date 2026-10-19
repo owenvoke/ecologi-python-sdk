@@ -1,4 +1,5 @@
 import requests_mock
+
 from ecologi import Ecologi
 
 ecologi = Ecologi()

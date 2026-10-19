@@ -1,4 +1,6 @@
-from typing import Optional, cast
+from __future__ import annotations
+
+from typing import cast
 
 import requests
 
@@ -35,7 +37,7 @@ class Ecologi:
     def get(self, url: str):
         return self.__request("GET", url)
 
-    def __request(self, method: str, url: str, params: Optional[dict] = None):
+    def __request(self, method: str, url: str, params: dict | None = None):
         if params is None:
             params = {}
 

@@ -22,7 +22,7 @@ from ecologi import Ecologi
 
 ecologi = Ecologi()
 
-sites = ecologi.impact('owenvoke')
+sites = ecologi.impact("owenvoke")
 ```
 
 | Available Methods             | Description                                                                 |
